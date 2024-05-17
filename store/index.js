@@ -57,7 +57,7 @@ export const actions = {
    */
   async getRankingList(context) {
     const response = await axios1.get(
-      "https://app.rakuten.co.jp/services/api/Travel/HotelRanking/20170426?applicationId=1098541415969458249&format=json&carrier=0&genre=all"
+      `https://app.rakuten.co.jp/services/api/Travel/HotelRanking/20170426?applicationId=${process.env.APP_ID}&format=json&carrier=0&genre=all`
     );
     // console.dir("response:" + JSON.stringify(response));
     const payload = response.data.Rankings[0].Ranking.hotels;
@@ -71,7 +71,7 @@ export const actions = {
    */
   async getOnsenRankingList(context) {
     const response = await axios1.get(
-      "https://app.rakuten.co.jp/services/api/Travel/HotelRanking/20170426?applicationId=1098541415969458249&format=json&carrier=0&genre=onsen"
+      `https://app.rakuten.co.jp/services/api/Travel/HotelRanking/20170426?applicationId=${process.env.APP_ID}&format=json&carrier=0&genre=onsen`
     );
     // console.dir("response:" + JSON.stringify(response));
     const payload = response.data.Rankings[0].Ranking.hotels;
@@ -87,7 +87,7 @@ export const actions = {
     // console.log("call3");
     try {
       const response = await axios1.get(
-        `https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20170426?applicationId=1098541415969458249&format=json&hotelNo=${paramsNo}&responseType=large`
+        `https://app.rakuten.co.jp/services/api/Travel/HotelDetailSearch/20170426?applicationId=${process.env.APP_ID}&format=json&hotelNo=${paramsNo}&responseType=large`
       );
 
       const payload = response.data;
@@ -107,7 +107,7 @@ export const actions = {
   async searchVacantList(context, vacantData) {
     try {
       const vacantResponce = await axios1.get(
-        `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=1098541415969458249&format=json&largeClassCode=japan&middleClassCode=${vacantData.middleClassCode}&smallClassCode=${vacantData.smallClassCode}&detailClassCode=${vacantData.detailClassCode}&checkinDate=${vacantData.checkinDate}&checkoutDate=${vacantData.checkoutDate}&adultNum=${vacantData.adultNum}&upClassNum=${vacantData.upClassNum}&lowClassNum=${vacantData.lowClassNum}&infantWithMBNum=${vacantData.infantWithMBNum}&infantWithMNum=${vacantData.infantWithMNum}&infantWithBNum=${vacantData.infantWithBNum}&infantWithoutMBNum=${vacantData.infantWithoutMBNum}&roomNum=${vacantData.roomNum}&responseType=large&page=${vacantData.page}`
+        `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=${process.env.APP_ID}&format=json&largeClassCode=japan&middleClassCode=${vacantData.middleClassCode}&smallClassCode=${vacantData.smallClassCode}&detailClassCode=${vacantData.detailClassCode}&checkinDate=${vacantData.checkinDate}&checkoutDate=${vacantData.checkoutDate}&adultNum=${vacantData.adultNum}&upClassNum=${vacantData.upClassNum}&lowClassNum=${vacantData.lowClassNum}&infantWithMBNum=${vacantData.infantWithMBNum}&infantWithMNum=${vacantData.infantWithMNum}&infantWithBNum=${vacantData.infantWithBNum}&infantWithoutMBNum=${vacantData.infantWithoutMBNum}&roomNum=${vacantData.roomNum}&responseType=large&page=${vacantData.page}`
       );
       // console.dir("response" + JSON.stringify(vacantResponce.data));
       context.commit("setVacantData", vacantResponce.data);
@@ -124,7 +124,7 @@ export const actions = {
    */
   async areaHotelLists(context, area) {
     const targetArea = await axios1.get(
-      `https://app.rakuten.co.jp/services/api/Travel/KeywordHotelSearch/20170426?applicationId=1098541415969458249&format=json&responseType=large&keyword=${area.keyword}&page=${area.pageNum}`
+      `https://app.rakuten.co.jp/services/api/Travel/KeywordHotelSearch/20170426?applicationId=${process.env.APP_ID}&format=json&responseType=large&keyword=${area.keyword}&page=${area.pageNum}`
     );
     // console.dir(JSON.stringify(targetArea));
     context.commit("setareaHotelLists", targetArea.data.hotels);
@@ -142,7 +142,7 @@ export const actions = {
     try {
       console.log(params);
       const vacantResponce = await axios1.get(
-        `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=1098541415969458249&format=json&checkinDate=${params.checkinDate}&checkoutDate=${params.checkoutDate}&adultNum=${params.searchCondition.adultNum}&hotelNo=${params.hotelNo}&upClassNum=${params.searchCondition.upClassNum}&lowClassNum=${params.searchCondition.lowClassNum}&infantWithMBNum=${params.searchCondition.infantWithMBNum}&infantWithMNum=${params.searchCondition.infantWithMNum}&infantWithBNum=${params.searchCondition.infantWithBNum}&infantWithoutMBNum=${params.searchCondition.infantWithoutMBNum}&roomNum=${params.searchCondition.roomNum}&responseType=large`
+        `https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20170426?applicationId=${process.env.APP_ID}&format=json&checkinDate=${params.checkinDate}&checkoutDate=${params.checkoutDate}&adultNum=${params.searchCondition.adultNum}&hotelNo=${params.hotelNo}&upClassNum=${params.searchCondition.upClassNum}&lowClassNum=${params.searchCondition.lowClassNum}&infantWithMBNum=${params.searchCondition.infantWithMBNum}&infantWithMNum=${params.searchCondition.infantWithMNum}&infantWithBNum=${params.searchCondition.infantWithBNum}&infantWithoutMBNum=${params.searchCondition.infantWithoutMBNum}&roomNum=${params.searchCondition.roomNum}&responseType=large`
       );
       if (vacantResponce !== null) {
         // console.dir("response" + JSON.stringify(vacantResponce));
@@ -171,7 +171,7 @@ export const actions = {
    */
   async getAreaCode(context) {
     const response = await axios1.get(
-      "https://app.rakuten.co.jp/services/api/Travel/GetAreaClass/20131024?applicationId=1098541415969458249&format=json"
+      `https://app.rakuten.co.jp/services/api/Travel/GetAreaClass/20131024?applicationId=${process.env.APP_ID}&format=json`
     );
     // console.dir("response:" + JSON.stringify(response));
     const payload = response.data.areaClasses.largeClasses[0].largeClass[1];
