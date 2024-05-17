@@ -77,6 +77,6 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     // サンプルでは 'build' ディレクトリを出力ディレクトリとして指定しています
-    outDir: "`./.nuxt/dist",
+    outDir: "./.nuxt/dist",
   },
 };
